@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './ExpenseForm.css'
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     // method 1 multiple state
     const [enteredTitle, setEnteredTitle] = useState('')
     const [enteredAmount, setEnteredAmount] = useState('')
@@ -19,7 +19,8 @@ const ExpenseForm = () => {
         setEnteredDate(event.target.value)
     }
 
-    // method 2 using one state
+    function methodTwo() {
+        // method 2 using one state
     // const [userInput, setUserInput] = useState({
     //     enteredTitle: '',
     //     enteredAmount: '',
@@ -46,6 +47,8 @@ const ExpenseForm = () => {
     //         return {...prevState, enteredDate: event.target.value}
     //     })
     // }
+    }
+    
 
     const submitHandler = (event) => {
         event.preventDefault() // prevent the default of the request being sent, hence the page won't reload
@@ -56,7 +59,7 @@ const ExpenseForm = () => {
             date: new Date(enteredDate)
         }
 
-        console.log(expenseData)
+        props.onSaveExpenseData(expenseData)
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');
